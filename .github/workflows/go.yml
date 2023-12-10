@@ -50,7 +50,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-      id-token: write
 
     steps:
     - name: Checkout repository
@@ -60,7 +59,7 @@ jobs:
       uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
       with:
         registry: ghcr.io
-        username: r4yamuro
+        username: ${{ github.actor }}
         password: ${{ secrets.TOKEN }}
 
     - name: Build and push Docker images
