@@ -59,9 +59,7 @@ jobs:
         password: ${{ secrets.TOKEN }}
 
     - name: Build and push Docker images
-      uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+      uses: docker/build-push-action@v5.0.0
       with:
-        context: .
         push: true
-        tags: latest
-        labels: ghcr.io/r4yamuro/karsajobs
+        tags: ghcr.io/r4yamuro/karsajobs:test
