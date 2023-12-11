@@ -1,0 +1,49 @@
+# Workflow ini akan melakukan melakukan build & push docker image karjasobs-ui ke Github Packages saat dilakukan push ke branch karsajobs-ui
+
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "karsajobs-ui" ]
+  pull_request:
+    branches: [ "karsajobs-ui" ]
+
+jobs:
+  lint-dockerfile:
+    name: Test dockerfile syntax
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install hadolint
+      run: |
+        sudo curl -L https://github.com/hadolint/hadolint/releases/download/v$HADOLINT_VERSION/hadolint-$(uname -s)-$(uname -m) -o /usr/local/bin/hadolint
+        sudo chmod 755 /usr/local/bin/hadolint
+      env:
+        HADOLINT_VERSION: 2.12.0
+
+    - name: Run hadolint
+      run: hadolint Dockerfile
+
+
+  build-app-karsajobs-ui:
+    name: Build and Push Karsajobs-UI
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Log into registry ghcr.io
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.TOKEN }}
+
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v5
+      with:
+        push: true
+        tags: ghcr.io/r4yamuro/karsajobs:latest
