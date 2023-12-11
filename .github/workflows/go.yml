@@ -1,5 +1,5 @@
-# This workflow will build a golang project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+# Workflow ini akan melakukan melakukan build & push docker image karjasobs ke Github Packages saat dilakukan push ke branch karsajobs
+
 
 name: Go
 
@@ -62,4 +62,4 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ghcr.io/r4yamuro/karsajobs:test
+        tags: ghcr.io/r4yamuro/karsajobs:latest
