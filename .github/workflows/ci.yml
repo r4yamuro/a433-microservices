@@ -38,7 +38,7 @@ jobs:
     - name: Log into registry ghcr.io
       uses: docker/login-action@v3
       with:
-        registry: ghcr.io
+        registry: ${{ env.REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.TOKEN }}
 
@@ -46,4 +46,4 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ghcr.io/r4yamuro/${{ github.repository }}/order-service:latest
+        tags: ghcr.io/r4yamuro/order-service:latest
