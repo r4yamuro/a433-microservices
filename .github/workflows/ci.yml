@@ -46,4 +46,4 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ghcr.io/r4yamuro/a433-microservices/order-service:latest
+        tags: ghcr.io/r4yamuro/${{ github.repository }}/order-service:latest
